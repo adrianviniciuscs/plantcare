@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Recognition</title>
+</head>
+<body>
+    <h1>Upload Image for Recognition</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {{ if .Result }}
+    <h2>Recognition Result</h2>
+    <pre>{{ .Result }}</pre>
+    {{ end }}
+
+</body>
+</html>
+
