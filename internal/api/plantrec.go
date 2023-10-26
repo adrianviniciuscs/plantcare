@@ -1,28 +1,30 @@
 package api
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"io"
-	"mime/multipart"
-	"net/http"
-	"github.com/tidwall/gjson"
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io"
+    "mime/multipart"
+    "net/http"
+    "github.com/tidwall/gjson"
 )
 
 const (
-	API_KEY   = "2b10I9c4DHkPJWMzrvYIDCOTu"
-	PROJECT   = "all"
-	apiURL    = "https://my-api.plantnet.org/v2/identify/%s?lang=pt-br&api-key=%s"
+    API_KEY   = "2b10I9c4DHkPJWMzrvYIDCOTu"
+    PROJECT   = "all"
+    apiURL    = "https://my-api.plantnet.org/v2/identify/%s?lang=pt-br&api-key=%s"
 )
 
 type PlantResponse struct {
-	CommonNames    string
-	ScientificName string
-	Score          float64
+    CommonNames    string
+    ScientificName string
+    Score          float64
 }
 
 func RecognizePlant(image multipart.File) (string, error) {
+
+
     body := &bytes.Buffer{}
     writer := multipart.NewWriter(body)
     data := map[string][]string{
@@ -67,6 +69,11 @@ func RecognizePlant(image multipart.File) (string, error) {
         return "", fmt.Errorf("error decoding JSON: %v", err)
     }
 
+    return FormatResponse(result)
+}
+
+
+func FormatResponse(result map[string]interface{}) (string, error) {
     prettyJSON, err := json.MarshalIndent(result, "", "  ")
     if err != nil {
         return "", fmt.Errorf("error formatting JSON: %v", err)
@@ -86,5 +93,3 @@ func RecognizePlant(image multipart.File) (string, error) {
 
     return finalResult, nil
 }
-
-
