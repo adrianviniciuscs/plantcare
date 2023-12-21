@@ -1,22 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Recognition</title>
-</head>
-<body>
-    <h1>Upload Image for Recognition</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Submit</button>
-    </form>
+<DOCTYPE html>
+    <html lang="en">
 
-    {{ if .Result }}
-    <h2>Recognition Result</h2>
-    <pre>{{ .Result }}</pre>
-    {{ end }}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Plant Recognition</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
 
-</body>
-</html>
+    <body class="text-white">
+        <div class="container">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-gray-700">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h1
+                            class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
+                            Upload image
+                        </h1>
+                        <form action="/upload" class="space-y-4 md:space-y-6" method="post"
+                            enctype="multipart/form-data">
+                            <input type="file" name="image" accept="image/*" required>
+                            <button class="bg-white text-black rounded-md p-2" type="submit">Submit</button>
 
+                        </form>
+                    </div>
+                </div>
+
+
+                {{ if .Result }}
+                <div class="resultContainer bg-gray-700 p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Recognition Result</h2>
+                    <div class="border-t border-gray-300 pt-4">
+                        <pre class="whitespace-pre-wrap">{{ .Result }}</pre>
+                    </div>
+                    </div>
+                {{ end }}
+
+
+    </body>
+
+    </html>
